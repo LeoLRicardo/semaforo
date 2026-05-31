@@ -1,38 +1,79 @@
 #container {
-    background: url('./assets/background.png');
-    background-repeat: no-repeat;
-    background-size: cover;    
-    background-position: center;
+  background-image: url("./assets/background.png");
+  background-repeat: no-repeat;
+  background-size: 900px 900px;
+  background-position: center;
+  width: 900px;
+  height: 900px;
 }
 
 .semaforo-wrapper {
-    width: 100px;
-    height: 300px;
-    background-color: darkgray;
-    margin: 1rem;
+  width: 50px;
+  height: 150px;
+  background-color: darkgray;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.vertical-cima {
+  position: absolute;
+  left: 240px;
+  top: 174px;
+}
+
+.vertical-baixo {
+  position: absolute;
+  left: 628px;
+  top: 640px;
+}
+
+.horizontal-esquerda {
+  rotate: 90deg;
+  position: absolute;
+  left: 190px;
+  top: 590px;
+}
+
+.horizontal-direita {
+  rotate: 90deg;
+  position: absolute;
+  left: 675px;
+  top: 225px;
 }
 
 .green {
-    width: 80px;
-    height: 80px;
-    background-color: lime;
-    border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  background-color: #0b4d0b;
+  border-radius: 50%;
 }
+
 .yellow {
-    width: 80px;
-    height: 80px;
-    background-color: yellow;
-    border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  background-color: #5c5c00;
+  border-radius: 50%;
 }
+
 .red {
-    width: 80px;
-    height: 80px;
-    background-color: red;
-    border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  background-color: #4d0b0b;
+  border-radius: 50%;
+}
+
+.green-active {
+  background-color: lime !important;
+}
+
+.yellow-active {
+  background-color: yellow !important;
+}
+
+.red-active {
+  background-color: red !important;
 }
