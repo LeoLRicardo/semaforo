@@ -1,13 +1,13 @@
 const container = document.getElementById("container");
 
 //criação elementos
-const createLight = (color) => {
+function createLight(color) {
   const light = document.createElement("div");
   light.className = color;
   return light;
-};
+}
 
-const createSemaforo = () => {
+function createSemaforo() {
   const fragment = document.createDocumentFragment();
 
   fragment.append(
@@ -17,9 +17,9 @@ const createSemaforo = () => {
   );
 
   return fragment;
-};
+}
 
-const createSemaforoPedestre = () => {
+function createSemaforoPedestre() {
   const fragment = document.createDocumentFragment();
 
   const label = document.createElement("div");
@@ -28,14 +28,14 @@ const createSemaforoPedestre = () => {
   fragment.append(label, createLight("green"), createLight("red"));
 
   return fragment;
-};
+}
 
-const createWrapper = (classes, content) => {
+function createWrapper(classes, content) {
   const wrapper = document.createElement("div");
   wrapper.className = classes;
   wrapper.append(content);
   return wrapper;
-};
+}
 
 container.append(
   createWrapper(
@@ -58,8 +58,12 @@ container.append(
 );
 
 //lógica
+
 // const ciclo = 60000; // 1 minuto
 const ciclo = 6000; // 6 segundos - pra testar
+
+// const tempoAmarelo = 5000
+const tempoAmarelo = 1000; // pra testar
 
 let estadoAtual = "horizontal";
 let apertouBotao = false;
@@ -80,44 +84,81 @@ function limpaLuzes() {
 
 function abreHorizontal() {
   limpaLuzes();
-
   horizontais.forEach((semaforo) => {
-    semaforo.querySelector(".green").classList.add("green-active");
-  });
-
-  verticais.forEach((semaforo) => {
     semaforo.querySelector(".red").classList.add("red-active");
   });
 
+  verticais.forEach((semaforo) => {
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
+  });
   pedestre.querySelector(".red").classList.add("red-active");
+
+  setTimeout(() => {
+    limpaLuzes();
+
+    horizontais.forEach((semaforo) => {
+      semaforo.querySelector(".green").classList.add("green-active");
+    });
+
+    verticais.forEach((semaforo) => {
+      semaforo.querySelector(".red").classList.add("red-active");
+    });
+
+    pedestre.querySelector(".red").classList.add("red-active");
+  }, [tempoAmarelo]);
 }
 
 function abreVertical() {
   limpaLuzes();
-
   horizontais.forEach((semaforo) => {
-    semaforo.querySelector(".red").classList.add("red-active");
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
   });
 
   verticais.forEach((semaforo) => {
-    semaforo.querySelector(".green").classList.add("green-active");
+    semaforo.querySelector(".red").classList.add("red-active");
   });
-
   pedestre.querySelector(".red").classList.add("red-active");
+
+  setTimeout(() => {
+    limpaLuzes();
+
+    horizontais.forEach((semaforo) => {
+      semaforo.querySelector(".red").classList.add("red-active");
+    });
+
+    verticais.forEach((semaforo) => {
+      semaforo.querySelector(".green").classList.add("green-active");
+    });
+
+    pedestre.querySelector(".red").classList.add("red-active");
+  }, [tempoAmarelo]);
 }
 
 function abrePedestre() {
   limpaLuzes();
-
   horizontais.forEach((semaforo) => {
-    semaforo.querySelector(".red").classList.add("red-active");
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
   });
 
   verticais.forEach((semaforo) => {
-    semaforo.querySelector(".red").classList.add("red-active");
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
   });
 
-  pedestre.querySelector(".green").classList.add("green-active");
+  pedestre.querySelector(".green").classList.add("red-active");
+
+  setTimeout(() => {
+    limpaLuzes();
+
+    horizontais.forEach((semaforo) => {
+      semaforo.querySelector(".red").classList.add("red-active");
+    });
+
+    verticais.forEach((semaforo) => {
+      semaforo.querySelector(".red").classList.add("red-active");
+    });
+
+    pedestre.querySelector(".green").classList.add("green-active");
+  }, [tempoAmarelo]);
 }
 
 function proximoCiclo() {
