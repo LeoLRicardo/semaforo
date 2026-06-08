@@ -1,4 +1,13 @@
+body {
+  margin: 0;                
+  min-height: 100vh;        
+  display: flex;
+  flex-direction: column;   
+  justify-content: center;  
+  align-items: center;      
+}
 #container {
+  position: relative;
   background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: 900px 900px;
@@ -6,7 +15,11 @@
   width: 900px;
   height: 900px;
 }
-
+.semaforo-pedestre {
+  position: absolute;
+  left: 115px;
+  top: 55px;
+}
 .semaforo-wrapper {
   width: 50px;
   height: 150px;
@@ -21,28 +34,28 @@
 
 .vertical-cima {
   position: absolute;
-  left: 240px;
-  top: 174px;
+  left: 296px;
+  top: 195px;
 }
 
 .vertical-baixo {
   position: absolute;
-  left: 628px;
-  top: 640px;
+  left: 555px;
+  top: 555px;
 }
 
 .horizontal-esquerda {
   rotate: 90deg;
   position: absolute;
-  left: 190px;
-  top: 590px;
+  left: 245px;
+  top: 506px;
 }
 
 .horizontal-direita {
   rotate: 90deg;
   position: absolute;
-  left: 675px;
-  top: 225px;
+  left: 604px;
+  top: 248px;
 }
 
 .green {
