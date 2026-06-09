@@ -32,9 +32,8 @@ body {
   left: 580px;        
   top: 730px;          
 
-  /* Estilos para o botão ficar bonito */
   padding: 10px 20px;
-  background-color: hsl(48, 100%, 50%); /* Amarelo */
+  background-color: hsl(48, 100%, 50%);
   color: rgb(0, 0, 0);
   font-weight: bold;
   text-align: center;
@@ -46,7 +45,7 @@ body {
 }
 .semaforo-pedestre div:first-child {
   padding: 10px 20px;
-  background-color: hsl(0, 100%, 70%); /* Amarelo */
+  background-color: hsl(0, 100%, 70%); 
   color: rgb(0, 0, 0);
   font-weight: bold;
   text-align: center;
