@@ -23,7 +23,7 @@ function createSemaforoPedestre() {
   const fragment = document.createDocumentFragment();
 
   const label = document.createElement("div");
-  label.textContent = "Pedestre";
+  label.textContent = "Semáforo \n Pedestre";
 
   fragment.append(label, createLight("green"), createLight("red"));
 
@@ -144,7 +144,7 @@ function abrePedestre() {
     semaforo.querySelector(".yellow").classList.add("yellow-active");
   });
 
-  pedestre.querySelector(".green").classList.add("red-active");
+  pedestre.querySelector(".red").classList.add("red-active");
 
   setTimeout(() => {
     limpaLuzes();

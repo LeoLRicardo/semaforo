@@ -15,6 +15,35 @@ body {
   width: 900px;
   height: 900px;
 }
+#pedestre-btn {
+  position: absolute; 
+  left: 580px;        
+  top: 730px;          
+
+  /* Estilos para o botão ficar bonito */
+  padding: 10px 20px;
+  background-color: hsl(48, 100%, 50%); /* Amarelo */
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  padding: 19px;
+  border: 2px solid rgba(0, 0, 0, 0.589);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.semaforo-pedestre div:first-child {
+  padding: 10px 20px;
+  background-color: hsl(0, 100%, 70%); /* Amarelo */
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  padding: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.589);
+  border-radius: 10px;
+  cursor: pointer;
+}
 .semaforo-pedestre {
   position: absolute;
   left: 115px;
