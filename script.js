@@ -65,11 +65,19 @@ const ciclo = 6000; // 6 segundos - pra testar
 // const tempoAmarelo = 5000
 const tempoAmarelo = 1000; // pra testar
 
+//array que guarda todos os ids dos timeouts pra limpar em caso de emergencia
+const timeoutIds = [];
+
 let estadoAtual = "horizontal";
 let apertouBotao = false;
 
 document.getElementById("pedestre-btn").addEventListener("click", () => {
   apertouBotao = true;
+});
+
+document.getElementById("emergencia-btn").addEventListener("click", () => {
+  estadoAtual = "emergencia";
+  proximoCiclo();
 });
 
 const horizontais = document.querySelectorAll(".semaforo-horizontal");
@@ -93,19 +101,21 @@ function abreHorizontal() {
   });
   pedestre.querySelector(".red").classList.add("red-active");
 
-  setTimeout(() => {
-    limpaLuzes();
+  timeoutIds.push(
+    setTimeout(() => {
+      limpaLuzes();
 
-    horizontais.forEach((semaforo) => {
-      semaforo.querySelector(".green").classList.add("green-active");
-    });
+      horizontais.forEach((semaforo) => {
+        semaforo.querySelector(".green").classList.add("green-active");
+      });
 
-    verticais.forEach((semaforo) => {
-      semaforo.querySelector(".red").classList.add("red-active");
-    });
+      verticais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
 
-    pedestre.querySelector(".red").classList.add("red-active");
-  }, [tempoAmarelo]);
+      pedestre.querySelector(".red").classList.add("red-active");
+    }, [tempoAmarelo]),
+  );
 }
 
 function abreVertical() {
@@ -119,19 +129,21 @@ function abreVertical() {
   });
   pedestre.querySelector(".red").classList.add("red-active");
 
-  setTimeout(() => {
-    limpaLuzes();
+  timeoutIds.push(
+    setTimeout(() => {
+      limpaLuzes();
 
-    horizontais.forEach((semaforo) => {
-      semaforo.querySelector(".red").classList.add("red-active");
-    });
+      horizontais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
 
-    verticais.forEach((semaforo) => {
-      semaforo.querySelector(".green").classList.add("green-active");
-    });
+      verticais.forEach((semaforo) => {
+        semaforo.querySelector(".green").classList.add("green-active");
+      });
 
-    pedestre.querySelector(".red").classList.add("red-active");
-  }, [tempoAmarelo]);
+      pedestre.querySelector(".red").classList.add("red-active");
+    }, [tempoAmarelo]),
+  );
 }
 
 function abrePedestre() {
@@ -146,42 +158,80 @@ function abrePedestre() {
 
   pedestre.querySelector(".red").classList.add("red-active");
 
-  setTimeout(() => {
-    limpaLuzes();
+  timeoutIds.push(
+    setTimeout(() => {
+      limpaLuzes();
 
-    horizontais.forEach((semaforo) => {
-      semaforo.querySelector(".red").classList.add("red-active");
-    });
+      horizontais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
 
-    verticais.forEach((semaforo) => {
-      semaforo.querySelector(".red").classList.add("red-active");
-    });
+      verticais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
 
-    pedestre.querySelector(".green").classList.add("green-active");
-  }, [tempoAmarelo]);
+      pedestre.querySelector(".green").classList.add("green-active");
+    }, [tempoAmarelo]),
+  );
+}
+
+function emergencia() {
+  limpaLuzes();
+  horizontais.forEach((semaforo) => {
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
+  });
+
+  verticais.forEach((semaforo) => {
+    semaforo.querySelector(".yellow").classList.add("yellow-active");
+  });
+
+  pedestre.querySelector(".red").classList.add("red-active");
+
+  timeoutIds.push(
+    setTimeout(() => {
+      limpaLuzes();
+
+      horizontais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
+
+      verticais.forEach((semaforo) => {
+        semaforo.querySelector(".red").classList.add("red-active");
+      });
+
+      pedestre.querySelector(".red").classList.add("red-active");
+    }, [tempoAmarelo]),
+  );
 }
 
 function proximoCiclo() {
+  timeoutIds.forEach((id) => clearTimeout(id));
+  timeoutIds.length = 0;
+
   switch (estadoAtual) {
     case "horizontal":
       abreHorizontal();
 
-      setTimeout(() => {
-        estadoAtual = apertouBotao ? "pedestre" : "vertical";
+      timeoutIds.push(
+        setTimeout(() => {
+          estadoAtual = apertouBotao ? "pedestre" : "vertical";
 
-        proximoCiclo();
-      }, ciclo);
+          proximoCiclo();
+        }, ciclo),
+      );
 
       break;
 
     case "vertical":
       abreVertical();
 
-      setTimeout(() => {
-        estadoAtual = apertouBotao ? "pedestre" : "horizontal";
+      timeoutIds.push(
+        setTimeout(() => {
+          estadoAtual = apertouBotao ? "pedestre" : "horizontal";
 
-        proximoCiclo();
-      }, ciclo);
+          proximoCiclo();
+        }, ciclo),
+      );
 
       break;
 
@@ -190,12 +240,27 @@ function proximoCiclo() {
 
       abrePedestre();
 
-      setTimeout(() => {
-        estadoAtual = "horizontal";
-        proximoCiclo();
-      }, ciclo);
+      timeoutIds.push(
+        setTimeout(() => {
+          estadoAtual = "horizontal";
+          proximoCiclo();
+        }, ciclo),
+      );
 
       break;
+    case "emergencia": {
+      timeoutIds.forEach((id) => clearTimeout(id));
+      timeoutIds.length = 0;
+
+      emergencia();
+
+      timeoutIds.push(
+        setTimeout(() => {
+          estadoAtual = "horizontal";
+          proximoCiclo();
+        }, ciclo),
+      );
+    }
   }
 }
 

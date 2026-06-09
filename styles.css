@@ -1,10 +1,10 @@
 body {
-  margin: 0;                
-  min-height: 100vh;        
+  margin: 0;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;   
-  justify-content: center;  
-  align-items: center;      
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #container {
   position: relative;
@@ -15,10 +15,17 @@ body {
   width: 900px;
   height: 900px;
 }
-#emergencia-btn {
+
+#button-wrapper {
   position: absolute;
   bottom: 50px;
   left: 50px;
+
+  display: flex;
+  gap: 16px;
+}
+
+#emergencia-btn {
   padding: 10px 20px;
   background-color: #cc0000; /* Vermelho Alerta */
   color: white;
@@ -28,17 +35,14 @@ body {
   cursor: pointer;
 }
 #pedestre-btn {
-  position: absolute; 
-  left: 580px;        
-  top: 730px;          
+  left: 580px;
+  top: 730px;
 
   padding: 10px 20px;
   background-color: hsl(48, 100%, 50%);
   color: rgb(0, 0, 0);
   font-weight: bold;
   text-align: center;
-  font-size: 15px;
-  padding: 19px;
   border: 2px solid rgba(0, 0, 0, 0.589);
   border-radius: 5px;
   cursor: pointer;
@@ -60,6 +64,7 @@ body {
   left: 115px;
   top: 55px;
 }
+
 .semaforo-wrapper {
   width: 50px;
   height: 150px;
